@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanX - Gerenciador de Finanças</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="bg-primary text-white text-center py-3">
+        <h1>FinanX</h1>
+    </header>
+    <main class="container my-4">
+        <!-- Formulário -->
+        <section>
+            <h2>Gerenciar Finanças</h2>
+            <form id="finance-form" class="row g-3">
+                <div class="col-md-4">
+                    <label for="type" class="form-label">Tipo</label>
+                    <select id="type" class="form-select" required>
+                        <option value="income" selected>Lucro</option>
+                        <option value="expense">Gasto</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="description" class="form-label">Descrição</label>
+                    <input type="text" id="description" class="form-control" placeholder="Ex.: Salário, Aluguel"
+                        required>
+                </div>
+                <div class="col-md-4">
+                    <label for="amount" class="form-label">Valor (R$)</label>
+                    <input type="number" id="amount" class="form-control" step="0.01" placeholder="Ex.: 1500.00"
+                        required>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success w-100">Adicionar</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Histórico de Transações -->
+        <section class="mt-5">
+            <h2>Histórico</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Descrição</th>
+                        <th>Valor (R$)</th>
+                        <th>Ações</th> <!-- Nova coluna para ações -->
+                    </tr>
+                </thead>
+                <tbody id="transaction-history">
+                    <!-- Linhas adicionadas dinamicamente -->
+                </tbody>
+            </table>
+        </section>
+
+
+        <!-- Total -->
+        <section class="mt-4 text-end">
+            <h3>Total Acumulado: <span id="total" class="text-primary">R$ 0.00</span></h3>
+        </section>
+    </main>
+    <!-- Modal de Sucesso -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="successModalLabel">Ação Concluída com Sucesso</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                A transação foi adicionada com sucesso ao seu histórico.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Erro -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="errorModalLabel">Erro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Por favor, preencha todos os campos corretamente antes de enviar.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Aviso -->
+<div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-dark">
+                <h5 class="modal-title" id="warningModalLabel">Aviso</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Você tem certeza de que deseja excluir esta transação? Esta ação não pode ser desfeita.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">Confirmar Excluir</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+
+</html>
